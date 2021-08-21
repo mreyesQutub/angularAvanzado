@@ -13,7 +13,7 @@ const HospitalSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     }
-}, {  collection: 'hospitales' });//de esta manera se puede cambiar el nombre de la coleccion
+}, {  collection: 'hospitales' });
 
 
 HospitalSchema.method('toJSON', function() {
