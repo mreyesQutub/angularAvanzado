@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "1a00c724-f6b8-4fb0-9a72-1c3db51e9ceb",
+		"name": "prueba",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "token de usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"miguel@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear factura",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTIxNGNkZGVlZTI4MzNhYjRlNDA5ZTAiLCJpYXQiOjE2MzAzMzEzNDQsImV4cCI6MTYzMDM3NDU0NH0.Xz75nbYOBf52RU5X3jf2_Z-cbtQQp-9dGzsHaEjNLjo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\":\"01\",\r\n    \"nombre\":\"miguel reyes\",\r\n    \"email\":\"m@gmail.com\",\r\n    \"valor\":\"1000000\",\r\n    \"img\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/facturas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar factura",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTIxNGNkZGVlZTI4MzNhYjRlNDA5ZTAiLCJpYXQiOjE2MzAzMzEzNDQsImV4cCI6MTYzMDM3NDU0NH0.Xz75nbYOBf52RU5X3jf2_Z-cbtQQp-9dGzsHaEjNLjo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo\":\"02\",\r\n    \"nombre\":\"miguel angerl\",\r\n    \"email\":\"m@gmail.com\",\r\n    \"valor\":\"1000000\",\r\n    \"img\":\"\",\r\n    \"estado\":\"aprobada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/facturas/612ce4df468d453f445579e0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"facturas",
+						"612ce4df468d453f445579e0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obtener facturas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MTIxNGNkZGVlZTI4MzNhYjRlNDA5ZTAiLCJpYXQiOjE2MzAzMzEzNDQsImV4cCI6MTYzMDM3NDU0NH0.Xz75nbYOBf52RU5X3jf2_Z-cbtQQp-9dGzsHaEjNLjo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/facturas",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"facturas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "factura por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/facturas/612ce4df468d453f445579e0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"facturas",
+						"612ce4df468d453f445579e0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
