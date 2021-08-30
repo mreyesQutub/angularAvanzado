@@ -76,7 +76,7 @@
 
             </div>
         </div>
-    </div>
+    </div>   
 
     <div class="col-4">
         <div class="card">
@@ -120,4 +120,47 @@
             </div>
         </div>
     </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h3>Facturas</h3>
+
+                <div class="alert alert-info animated fadeIn fast"
+                    *ngIf="facturas.length === 0">
+                  <p class="mb-0">
+                      No hay facturas con ese término
+                  </p>
+                </div>
+
+                <div class="table-responsive"
+                    *ngIf="facturas.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Factura</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let factura of facturas"
+                                class="animated fadeIn fast">
+                                <td>
+                                    <img [src]="factura.img | imagen:'facturas'" 
+                                         class="w75"/>
+                                </td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/factura', factura._id ]">
+                                        {{ factura.nombre }}
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    
 </div> 

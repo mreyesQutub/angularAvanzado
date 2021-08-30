@@ -14,9 +14,7 @@ const FacturaSchema = Schema({
     type: String,
     required: true,
   },
-  img: {
-    type: String,
-  },
+ 
   valor: {
     type: String,
   },
@@ -24,6 +22,8 @@ const FacturaSchema = Schema({
     type: String,
     required:true,
     default:"activo"
+  }, img: {
+    type: String,
   },
   usuario: {
     type: Schema.Types.ObjectId,

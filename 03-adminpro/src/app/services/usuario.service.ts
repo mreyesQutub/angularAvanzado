@@ -29,7 +29,7 @@ export class UsuarioService {
                 private router: Router,
                 private ngZone: NgZone ) {
 
-    this.googleInit();
+    //this.googleInit();
   }
 
   get token(): string {
@@ -52,20 +52,20 @@ export class UsuarioService {
     }
   }
 
-  googleInit() {
+  // googleInit() {
 
-    return new Promise( resolve => {
-      gapi.load('auth2', () => {
-        this.auth2 = gapi.auth2.init({
-          client_id: '1045072534136-oqkjcjvo449uls0bttgvl3aejelh22f5.apps.googleusercontent.com',
-          cookiepolicy: 'single_host_origin',
-        });
+  //   return new Promise( resolve => {
+  //     gapi.load('auth2', () => {
+  //       this.auth2 = gapi.auth2.init({
+  //         client_id: '1045072534136-oqkjcjvo449uls0bttgvl3aejelh22f5.apps.googleusercontent.com',
+  //         cookiepolicy: 'single_host_origin',
+  //       });
 
-        resolve();
-      });
-    })
+  //       resolve();
+  //     });
+  //   })
 
-  }
+  // }
 
   guardarLocalStorage( token: string, menu: any ) {
 
