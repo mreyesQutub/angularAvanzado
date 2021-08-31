@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const Medico = require('../models/medico');
 const Hospital = require('../models/hospital');
+const Factura = require('../models/factura');
 
 const borrarImagen = ( path ) => {
     if ( fs.existsSync( path ) ) {
@@ -62,6 +63,22 @@ const actualizarImagen = async(tipo, id, nombreArchivo) => {
 
             usuario.img = nombreArchivo;
             await usuario.save();
+            return true;
+
+        break;
+        case 'facturas':
+
+            const factura = await Factura.findById(id);
+            if ( !factura ) {
+                console.log('No es una factura por id');
+                return false;
+            }
+
+            pathViejo = `./uploads/facturas/${ factura.img }`;
+            borrarImagen( pathViejo );
+
+            factura.img = nombreArchivo;
+            await factura.save();
             return true;
 
         break;

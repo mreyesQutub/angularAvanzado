@@ -20,7 +20,7 @@ router.get( '/', validarJWT, getFacturas );
 router.post( '/',
     [
         validarJWT,
-        check('nombre','El nombre  es necesario').not().isEmpty(),       
+        check('codigo','El codigo es necesario').not().isEmpty(),       
         validarCampos
     ], 
     crearFactura 
@@ -29,7 +29,7 @@ router.post( '/',
 router.put( '/:id',
     [
         validarJWT,
-        check('nombre','El nombre es necesario').not().isEmpty(),
+        check('codigo','El codigo es necesario').not().isEmpty(),
         validarCampos
     ],
     actualizarFactura
