@@ -24,6 +24,7 @@ import { MedicoComponent } from './mantenimientos/medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { FacturasComponent } from './mantenimientos/facturas/facturas.component';
 import { FacturaComponent } from './mantenimientos/factura/factura.component';
+import { AprobadasComponent } from './mantenimientos/aprobadas/aprobadas.component';
 
 
 
@@ -46,6 +47,7 @@ import { FacturaComponent } from './mantenimientos/factura/factura.component';
     BusquedaComponent,
     FacturasComponent,
     FacturaComponent,
+    AprobadasComponent,
   ],
   exports: [
     DashboardComponent,

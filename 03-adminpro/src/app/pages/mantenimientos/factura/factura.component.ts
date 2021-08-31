@@ -34,7 +34,7 @@ export class FacturaComponent implements OnInit {
       email: ['', Validators.required],
       valor: ['', Validators.required],
       estado: ['activa'],
-      img: [''],
+      img: ['no-img.jpg'],
     });
 
     this.cargarFacturas();
@@ -62,7 +62,7 @@ export class FacturaComponent implements OnInit {
           email,
           valor,
           estado = 'activa',
-          img = '',
+          img = 'no-img.jpg',
         } = factura;
         this.facturaSeleccionada = factura;
         this.facturaForm.setValue({

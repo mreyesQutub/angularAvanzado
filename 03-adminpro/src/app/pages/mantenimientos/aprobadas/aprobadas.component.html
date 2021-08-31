@@ -19,26 +19,10 @@
                     <div class="col-8">
                         <h4 class="card-title">Facturas ({{ facturas.length }})</h4>
                         <h6 class="card-subtitle">
-                            Facturas registradas
+                            Facturas aprobadas
                         </h6>
                     </div>
-
-                    <div class="col-md-2">
-                        <div class="text-right">
-                            <a class="btn btn-primary" routerLink="/dashboard/factura/nueva">
-                                <i class="fa fa-hospital-o"></i>
-                                Crear factura
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="text-right">
-                            <a class="btn btn-success" routerLink="/dashboard/aprobadas">
-                                <i class="fa fa-hospital-o"></i>
-                                Facturas Aprobadas
-                            </a>
-                        </div>
-                    </div>
+                  
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -54,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let factura of facturas">
+                            <tr *ngFor="let factura of facturas" >
                                 <td>
                                     {{ factura.codigo }}
                                 </td>
@@ -72,18 +56,18 @@
                                 </td>
                                 <td class="text-center">
                                     <img [src]="factura.img | imagen:'facturas'" [alt]="factura.codigo" class="w100 cursor"
-                                        (click)="abrirModal(factura)">
+                                       >
                                 </td>
 
                                 <td class="text-nowrap text-center">
                                     <a [routerLink]="['/dashboard','factura', factura._id ]" data-toggle="tooltip"
                                         data-original-title="Editar">
-                                        <i class="fa fa-pencil text-inverse m-r-10"></i>
+                                        <i class="fa fa-eye text-inverse m-r-10"></i>
                                     </a>
 
-                                    <a class="cursor" data-toggle="tooltip" data-original-title="Borrar"
-                                        (click)="borrarFactura( factura )">
-                                        <i class="fa fa-close text-danger"></i>
+                                    <a class="cursor" data-toggle="tooltip" data-original-title="Imprimir"
+                                        >
+                                        <i class="fa fa-print"></i>
                                     </a>
                                 </td>
                             </tr>
