@@ -33,7 +33,8 @@ export class FacturaComponent implements OnInit {
       nombre: ['', Validators.required],
       email: ['', Validators.required],
       valor: ['', Validators.required],
-      estado: ['', Validators.required],
+      estado: ['activa'],
+      img: [''],
     });
 
     this.cargarFacturas();
@@ -55,9 +56,23 @@ export class FacturaComponent implements OnInit {
           return this.router.navigateByUrl(`/dashboard/facturas`);
         }
 
-        const { codigo, nombre, email, valor, estado } = factura;
+        const {
+          codigo,
+          nombre,
+          email,
+          valor,
+          estado = 'activa',
+          img = '',
+        } = factura;
         this.facturaSeleccionada = factura;
-        this.facturaForm.setValue({ codigo, nombre, email, valor, estado });
+        this.facturaForm.setValue({
+          codigo,
+          nombre,
+          email,
+          valor,
+          estado,
+          img,
+        });
       });
   }
 
@@ -68,8 +83,9 @@ export class FacturaComponent implements OnInit {
   }
 
   guardarFactura() {
-    const { codigo, nombre, email, valor, estado } = this.facturaForm.value;
-console.log(this.facturaForm)
+    const { codigo, nombre, email, valor, estado, img } =
+      this.facturaForm.value;
+    console.log(this.facturaForm);
     if (this.facturaSeleccionada) {
       // actualizar
       const data = {
@@ -90,7 +106,7 @@ console.log(this.facturaForm)
         .crearFactura(this.facturaForm.value)
         .subscribe((resp: any) => {
           Swal.fire('Creada', `${codigo} creada correctamente`, 'success');
-          this.router.navigateByUrl(`/dashboard/facturas/${resp.factura._id}`);
+          this.router.navigateByUrl(`/dashboard/facturas`);
         });
     }
   }
