@@ -8,7 +8,7 @@ const getFacturas = async (req, res) => {
   const [facturas, total] = await Promise.all([
     Factura.find({}, "codigo nombre email valor estado img")
       .skip(desde)
-      .limit(20.0),
+      .limit(5),
 
     Factura.countDocuments()
   ]);

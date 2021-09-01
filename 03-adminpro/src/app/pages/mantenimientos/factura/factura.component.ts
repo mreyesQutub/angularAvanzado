@@ -14,9 +14,13 @@ import { delay } from 'rxjs/operators';
   styles: [],
 })
 export class FacturaComponent implements OnInit {
+  public totalFacturas: number = 0;
   public facturaForm: FormGroup;
   public facturaSeleccionada: Factura;
   public facturas: Factura[] = [];
+  public facturasTemp: Factura[] = [];
+  public desde: number = 0;
+  public cargando: boolean = true;
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +51,6 @@ export class FacturaComponent implements OnInit {
     if (id === 'nueva') {
       return;
     }
-
     this.facturaService
       .obtenerFacturaPorId(id)
       .pipe(delay(100))
@@ -55,7 +58,6 @@ export class FacturaComponent implements OnInit {
         if (!factura) {
           return this.router.navigateByUrl(`/dashboard/facturas`);
         }
-
         const {
           codigo,
           nombre,
@@ -76,10 +78,21 @@ export class FacturaComponent implements OnInit {
       });
   }
 
+  // cargarFacturas() {
+  //   this.facturaService.cargarFacturas().subscribe((facturas: Factura[]) => {
+  //     this.facturas = facturas;
+  //   });
+  // }
   cargarFacturas() {
-    this.facturaService.cargarFacturas().subscribe((facturas: Factura[]) => {
-      this.facturas = facturas;
-    });
+    this.cargando = true;
+    this.facturaService
+      .cargarFacturas(this.desde)
+      .subscribe(({ total, facturas }) => {
+        this.totalFacturas = total;
+        this.facturas = facturas;
+        this.facturasTemp = facturas;
+        this.cargando = false;
+      });
   }
 
   guardarFactura() {

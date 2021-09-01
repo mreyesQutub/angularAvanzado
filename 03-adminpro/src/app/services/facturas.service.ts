@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Factura } from '../models/facturas.model';
-
+import { CargarFactura } from '../interfaces/facturas.interface';
 const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root',
 })
 export class FacturasService {
+  public factura: Factura;
   constructor(private http: HttpClient) {}
 
   get token(): string {
@@ -25,11 +26,19 @@ export class FacturasService {
     };
   }
 
-  cargarFacturas() {
-    const url = `${base_url}/facturas`;
+  cargarFacturas(desde: number = 0) {
+    const url = `${base_url}/facturas?desde=${desde}`;
     return this.http
-      .get(url, this.headers)
-      .pipe(map((resp: { ok: boolean; facturas: Factura[] }) => resp.facturas));
+      .get<CargarFactura>(url, this.headers)
+      .pipe(
+        map((resp) => {
+          const facturas = resp.facturas          
+          return {
+            total: resp.total,
+            facturas,
+          };
+        })
+      );
   }
 
   obtenerFacturaPorId(id: string) {
@@ -46,7 +55,7 @@ export class FacturasService {
     valor: string;
     estado: string;
   }) {
-    console.log(JSON.stringify(this.headers))
+    console.log(JSON.stringify(this.headers));
     const url = `${base_url}/facturas`;
     return this.http.post(url, factura, this.headers);
   }
@@ -57,7 +66,7 @@ export class FacturasService {
   }
 
   borrarFactura(_id: string) {
-    console.log(_id, "aca el; id")
+    console.log(_id, 'aca el; id');
     const url = `${base_url}/facturas/${_id}`;
     return this.http.delete(url, this.headers);
   }

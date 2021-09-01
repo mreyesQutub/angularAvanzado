@@ -1,3 +1,17 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                
+                <input type="text"
+                        class="form-control"
+                        placeholder="Buscar factura"
+                        (keyup)="buscar( txtTermino.value )"
+                        #txtTermino/>
+            </div>
+        </div>
+    </div>
+</div> 
 <div class="row animated fadeIn fast" *ngIf="cargando">
     <div class="col-12">
 
@@ -54,7 +68,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let factura of facturas">
+                            <tr *ngFor="let factura of facturas ">
                                 <td>
                                     {{ factura.codigo }}
                                 </td>
@@ -91,10 +105,11 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- 
-                <button class="btn btn-secondary">Anteriores</button>
-                &nbsp;
-                <button class="btn btn-secondary">Siguientes</button> -->
+                <div *ngIf="txtTermino.value.length === 0">
+                    <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button>
+                    &nbsp;
+                    <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguientes</button>
+                </div>
 
             </div>
         </div>

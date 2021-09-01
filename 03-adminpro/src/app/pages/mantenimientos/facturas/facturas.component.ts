@@ -16,9 +16,11 @@ import { ModalImagenService } from '../../../services/modal-imagen.service';
   ]
 })
 export class FacturasComponent implements OnInit, OnDestroy {
-
+  public totalFacturas: number = 0;
   public cargando: boolean = true;
   public facturas: Factura[] = [];
+  public facturaTemporal: Factura[] = [];
+  public desde: number = 0;
   private imgSubs: Subscription;
 
   constructor( private facturaService: FacturasService,
@@ -39,29 +41,38 @@ export class FacturasComponent implements OnInit, OnDestroy {
 
   cargarFacturas() {
     this.cargando = true;
-    this.facturaService.cargarFacturas()
-      .subscribe( facturas => {
-        this.cargando = false;
-        this.facturas = facturas;
+    this.facturaService.cargarFacturas(this.desde)
+    .subscribe( ({ total, facturas }) => {
+      this.totalFacturas = total;
+      this.facturas = facturas;
+      this.facturaTemporal = facturas;
+      this.cargando = false;
       });
   }
 
-  // buscar( termino: string ) {
+  buscar( termino: string ) {
+    if ( termino.length === 0 ) {
+      return this.facturas = this.facturaTemporal;
+    }
+    this.busquedasService.buscar( 'facturas', termino )
+        .subscribe( (resp: Factura[]) => {
+          this.facturas = resp;
+        });
+  }
 
-  //   if ( termino.length === 0 ) {
-  //     return this.cargarFacturas();
-  //   }
+  cambiarPagina( valor: number ) {
+    this.desde += valor;
+    if ( this.desde < 0 ) {
+      this.desde = 0;
+    } else if ( this.desde >= this.totalFacturas ) {
+      this.desde -= valor; 
+    }
 
-  //   this.busquedasService.buscar( 'facturas', termino )
-  //       .subscribe( resp => {
-  //         this.facturas = resp;
-  //       });
-  // }
+    this.cargarFacturas();
+  }
 
   abrirModal(factura: Factura) {
-
     this.modalImagenService.abrirModal( 'facturas', factura._id, factura.img );
-
   }
 
   borrarFactura( factura: Factura ) {
